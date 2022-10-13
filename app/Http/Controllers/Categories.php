@@ -36,4 +36,20 @@ class Categories extends Controller
         $category->save();
         return redirect()->route('categories.index');
     }
+
+    public function destroy($id){
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return redirect()->route('categories.index');
+    }
+
+    public function trash(){
+        return view('categories.trash', [ 'categories' => Category::onlyTrashed()->get() ]);
+    }
+
+    public function restore($id){
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->restore();
+        return redirect()->route('categories.trash');
+    }
 }

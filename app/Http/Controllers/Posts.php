@@ -49,9 +49,19 @@ class Posts extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function delete($id){
+    public function destroy($id){
         $post = Post::findOrFail($id);
         $post->delete();
         return redirect()->route('posts.index');
+    }
+
+    public function trash(){
+        return view('posts.trash', [ 'posts' => Post::onlyTrashed()->get() ]);
+    }
+
+    public function restore($id){
+        $post = Post::onlyTrashed()->findOrFail($id);
+        $post->restore();
+        return redirect()->route('posts.trash');
     }
 }
