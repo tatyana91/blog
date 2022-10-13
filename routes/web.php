@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Categories;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Posts;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/posts', Posts::class);
+Route::resource('/categories', Categories::class);
