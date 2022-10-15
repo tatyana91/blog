@@ -1,13 +1,4 @@
-@props([
-    'name',
-    'label',
-    'item',
-    'value' => ''
-])
-
-<label for="{{ $name }}" class="form-label">{{ $label }}</label>
+<label for="{{ $id }}" class="form-label">{{ $label }}</label>
 <textarea class="form-control @error($name) is-invalid @enderror"
-          name="{{ $name }}"
-          id="{{ $name }}"
-          rows="3">{{ old($name) ?? ($item[$name] ?? '') }}</textarea>
+          name="{{ $name }}" id="{{ $id }}" rows="3">{{ $value }}</textarea>
 @error($name) <div class="invalid-feedback">{{ $message }}</div> @enderror
