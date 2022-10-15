@@ -20,6 +20,12 @@ class Categories extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'title' => 'required|min:8|max:128',
+            'slug' => 'required|min:8|max:128|unique:categories',
+            'description' => 'required|min:8'
+        ]);
+
         $data = $request->only([ 'title', 'slug', 'description']);
         Category::create($data);
         return redirect()->route('categories.index');
@@ -30,6 +36,12 @@ class Categories extends Controller
     }
 
     public function update(Request $request, $id){
+        $request->validate([
+            'title' => 'required|min:8|max:128',
+            'slug' => "required|min:8|max:128|unique:categories,slug,$id",
+            'description' => 'required|min:8'
+        ]);
+
         $category = Category::findOrFail($id);
         $data = $request->only([ 'title', 'slug', 'description']);
         $category->fill($data);

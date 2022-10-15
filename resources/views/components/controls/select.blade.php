@@ -1,8 +1,9 @@
 @props([
     'name',
     'label',
-    'value' => '',
-    'options'
+    'options',
+    'item',
+    'value' => ''
 ])
 
 <label for="{{ $name }}" class="form-label">{{ $label }}</label>
@@ -10,7 +11,8 @@
         aria-label="{{ $label }}" name="{{ $name }}">
     <option value="" readonly>-</option>
     @foreach($options as $id => $title)
-        <option value="{{ $id }}" {{ $value == $id ? 'selected' : '' }}>{{ $title }}</option>
+        <option value="{{ $id }}"
+            {{ (old($name) ?? ($item[$name] ?? '')) == $id ? 'selected' : '' }}>{{ $title }}</option>
     @endforeach
 </select>
 @error($name) <div class="invalid-feedback">{{ $message }}</div> @enderror
