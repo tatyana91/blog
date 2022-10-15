@@ -7,13 +7,15 @@
         <h2>{{ $post->title }}</h2>
         <div>Category: {{ $post->category->title ?? '-' }}</div>
         <em>{{ $post->created_at }}</em><br>
-        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">more...</a>
-        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">edit...</a>
-        <form method="post" action="{{ route('posts.destroy', $post->id) }}">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-danger">delete</button>
-        </form>
+        <div class="btnsBlock">
+            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">show</a>
+            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">edit</a>
+            <form method="post" action="{{ route('posts.destroy', $post->id) }}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger">delete</button>
+            </form>
+        </div>
         <hr>
     @endforeach
 </x-layouts.base>

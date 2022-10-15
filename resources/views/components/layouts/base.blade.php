@@ -23,10 +23,10 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <x-layouts.navlink route="posts.index" link="{{ route('posts.index') }}" title="Blog"/>
+                            <x-layouts.navlink route="posts.index" title="Blog"/>
                         </li>
                         <li class="nav-item">
-                            <x-layouts.navlink route="categories.index" link="{{ route('categories.index') }}" title="Categories"/>
+                            <x-layouts.navlink route="categories.index" title="Categories"/>
                         </li>
                     </ul>
                 </div>
