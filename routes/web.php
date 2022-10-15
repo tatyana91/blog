@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Categories;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Posts;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function(){
     return view('welcome');
+})->name('home');
+
+Route::resource('/posts', Posts::class);
+Route::controller(Posts::class)->group(function(){
+    Route::get('/posts/trash', 'trash')->name('posts.trash');
+    Route::put('/posts/{post}/restore', 'restore')->name('posts.restore');
+});
+
+Route::resource('/categories', Categories::class);
+Route::controller(Categories::class)->group(function(){
+    Route::get('/categories/trash', 'trash')->name('categories.trash');
+    Route::put('/categories/{category}/restore', 'restore')->name('categories.restore');
 });
