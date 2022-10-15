@@ -1,16 +1,13 @@
 @csrf
 <div class="mb-3">
-    <x-controls.select name="category_id"
-                       label="Category"
-                       :item="$post ?? null"
-                       :options="$categories"/>
+    <x-form-select name="category_id" label="Category" :options="$categories" placeholder="Choose..."/>
 </div>
 <div class="mb-3">
-    <x-controls.input name="title" label="Title" :item="$post ?? null"/>
+    <x-form-input name="title" label="Title"/>
 </div>
 <div class="mb-3">
-    <x-controls.input name="slug" label="Slug" :item="$post ?? null"/>
+    <x-form-input name="slug" label="Slug"/>
 </div>
 <div class="mb-3">
-    <x-controls.textarea name="content" label="Content" :item="$post ?? null"/>
+    <x-form-textarea name="content" label="Content" />
 </div>
