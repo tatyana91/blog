@@ -14,6 +14,10 @@ use App\Http\Controllers\Posts;
 |
 */
 
+Route::get('/', function(){
+    return view('welcome');
+})->name('home');
+
 Route::resource('/posts', Posts::class);
 Route::controller(Posts::class)->group(function(){
     Route::get('/posts/trash', 'trash')->name('posts.trash');

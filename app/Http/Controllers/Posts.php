@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -16,33 +17,38 @@ class Posts extends Controller
     }
 
     public function create(){
-        return view('posts.create');
+        $categories = Category::all()->pluck('title', 'id');
+        return view('posts.create', compact('categories'));
     }
 
     public function store(Request $request){
         $request->validate([
             'title' => 'required|min:8|max:128',
             'slug' => 'required|min:8|max:128|unique:posts',
-            'content' => 'required|min:8'
+            'content' => 'required|min:8',
+            'category_id' => 'required|exists:categories,id'
         ]);
 
-        $data = $request->only([ 'title', 'content', 'slug' ]);
+        $data = $request->only([ 'title', 'content', 'slug', 'category_id' ]);
         Post::create($data);
         return redirect()->route('posts.index');
     }
 
     public function edit($id){
-        return view('posts.edit', [ 'post' => Post::findOrFail($id) ]);
+        $post = Post::findOrFail($id);
+        $categories = Category::all()->pluck('title', 'id');
+        return view('posts.edit', compact('categories', 'post'));
     }
 
     public function update(Request $request, $id){
         $request->validate([
             'title' => 'required|min:8|max:128',
             'slug' => "required|min:8|max:128|unique:posts,slug,$id",
-            'content' => 'required|min:8'
+            'content' => 'required|min:8',
+            'category_id' => 'required|exists:categories,id'
         ]);
 
-        $data = $request->only([ 'title', 'content', 'slug' ]);
+        $data = $request->only([ 'title', 'content', 'slug', 'category_id' ]);
         $post = Post::findOrFail($id);
         $post->fill($data);
         $post->save();
