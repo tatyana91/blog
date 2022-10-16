@@ -3,6 +3,7 @@
 use App\Http\Controllers\Categories;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Posts;
+use App\Http\Controllers\Comments;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,8 @@ Route::controller(Posts::class)->group(function(){
     Route::get('/posts/trash', 'trash')->name('posts.trash');
     Route::put('/posts/{post}/restore', 'restore')->name('posts.restore');
 });
+
+Route::resource('/posts/{post}/comments', Comments::class);
 
 Route::resource('/categories', Categories::class);
 Route::controller(Categories::class)->group(function(){
